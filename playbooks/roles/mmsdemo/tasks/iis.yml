@@ -1,0 +1,9 @@
+---
+  # file to install & configure IIS
+- name: Install IIS Web Service
+  win_feature_new:
+    name: "Web-Server"
+    state: present
+    restart: yes
+    include_sub_features: yes
+    include_management_tools: yes

@@ -1,0 +1,7 @@
+---
+- name: MMS 2015 demo
+  hosts: windows
+  gather_facts: true
+  serial: 1
+  roles:
+    - mmsdemo
