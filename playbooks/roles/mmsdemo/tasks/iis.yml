@@ -7,3 +7,14 @@
     restart: yes
     include_sub_features: yes
     include_management_tools: yes
+
+- name: Enable Anonymous authentication on default website
+  raw: "powershell.exe -command \"Set-WebConfigurationProperty -Filter '/system.webServer/security/authentication/anonymousAuthentication' -Name Enabled -Value false -PSPath 'IIS:\\' -Location 'Default Web Site'\""
+
+- name: Disable basic authentication on default website
+  raw: "powershell.exe -command \"Set-WebConfigurationProperty -Filter '/system.webServer/security/authentication/basicAuthentication' -Name Enabled -Value true -PSPath 'IIS:\\' -Location 'Default Web Site'\""
+
+- name: Copy new default.html to Default Web Site
+  win_template:
+    src: test.htm.j2
+    dest: "C:\\inetpub\\wwwroot\\test.htm"
