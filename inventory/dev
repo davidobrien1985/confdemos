@@ -1,3 +1,6 @@
+[dev:children]
+windows
+
 [windows]
 192.168.50.4
 

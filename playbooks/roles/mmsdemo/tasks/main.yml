@@ -1,6 +1,6 @@
 ---
 # tasks file for mmsdemo
-- include_vars: mmsdemo_secret.yml
+#- include_vars: mmsdemo_secret.yml
 
 - include: prep.yml
 - include: iis.yml
