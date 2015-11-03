@@ -1,3 +1,3 @@
 #!/usr/bin/python
 import os
-print os.environ['env.ansible_vault_pass']
+print os.environ['ansible_vault_pass']
