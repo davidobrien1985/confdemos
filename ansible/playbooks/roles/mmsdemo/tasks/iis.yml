@@ -9,7 +9,7 @@
 #     include_management_tools: yes
 
 - name: Install IIS Web Service with DSC
-  raw: "powershell.exe -command \"Invoke-DscResource -Name WindowsFeature -Method Set -Property @{Ensure='present';Name='Web-Server';IncludeAllSubFeature=`$true} -Verbose\""
+  raw: "powershell.exe -command \"Invoke-DscResource -Name WindowsFeature -Method Set -Property @{Ensure='present';Name='Web-Server';IncludeAllSubFeature=$true} -Verbose\""
 
 - name: Enable Anonymous authentication on default website
   raw: "powershell.exe -command \"Set-WebConfigurationProperty -Filter '/system.webServer/security/authentication/anonymousAuthentication' -Name Enabled -Value false -PSPath 'IIS:\\' -Location 'Default Web Site'\""
