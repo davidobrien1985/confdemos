@@ -1,3 +1,3 @@
 ﻿function mms2015 {
-    New-AzureVM -ServiceName $servicename -Location $location
+    New-AzureVM -ServiceName $servicename -Location $location 
 }
