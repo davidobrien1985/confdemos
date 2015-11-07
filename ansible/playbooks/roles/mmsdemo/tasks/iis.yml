@@ -9,7 +9,11 @@
 #     include_management_tools: yes
 
 - name: Install IIS Web Service with DSC
+<<<<<<< HEAD:playbooks/roles/mmsdemo/tasks/iis.yml
   raw: "powershell.exe -command \"Invoke-DscResource -Name WindowsFeature -Method Set -Property @{Ensure='present';Name='Web-Server';IncludeAllSubFeature=$true} -Verbose\""
+=======
+  raw: "powershell.exe -command \"Invoke-DscResource -Name WindowsFeature -Method Set -Property @{Ensure='present';Name='Web-Server';IncludeAllSubFeature=`$true} -Verbose\""
+>>>>>>> abb1dc49610d014eb09439ecbfeb63a3fc2af188:ansible/playbooks/roles/mmsdemo/tasks/iis.yml
 
 - name: Enable Anonymous authentication on default website
   raw: "powershell.exe -command \"Set-WebConfigurationProperty -Filter '/system.webServer/security/authentication/anonymousAuthentication' -Name Enabled -Value false -PSPath 'IIS:\\' -Location 'Default Web Site'\""
