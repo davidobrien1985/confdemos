@@ -5,16 +5,6 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 Import-Module 'C:\Program Files (x86)\Microsoft Configuration Manager\AdminConsole\bin\ConfigurationManager.psd1'
 Push-Location 'cm2:\'
 
-
-#Describe "New-MMSDemoCollection" {
-#    It "Verifies collection is created" {
-#        $Results = New-MMSDemoCollection -FolderName 'Regions' -ColName 'MMSDemoCollection' -LimitCollection 'All Systems'
-#        Remove-CMDeviceCollection -InputObject $Results -Force
-#        $Results.Name | Should be 'MMSDemoCollection'
-#        $Results.LimitToCollectionName | Should be 'All Systems'
-#    }
-#}
-
 Describe "New-MMSDemoApplication" {
     It "Throws when application exists" {
         Mock Get-CMApplication { return "1" }

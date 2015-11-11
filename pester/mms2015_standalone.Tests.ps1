@@ -49,7 +49,7 @@ Describe 'Demo' {
         Mock -CommandName New-Item -MockWith {$file = New-Object -TypeName pscustomobject -Property @{FullName = ''}; $file.FullName = 'Testdrive:\bla.txt'; return $file }
 
         $file = Create-File -Path Testdrive:\bla.txt -ItemType File -Force
-        $file.FullName | Should Be 'Testdrive:\bla.txt'
+        $file.FullName | Should Be Testdrive:\bla.txt
     }
   }
 }
