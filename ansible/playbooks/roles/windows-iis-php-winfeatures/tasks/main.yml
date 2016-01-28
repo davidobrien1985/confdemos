@@ -1,0 +1,11 @@
+- name: webserver
+  register: win_feature_result
+  win_feature:
+      state=present
+      restart=yes
+      name="Web-Server,Web-Common-Http,Web-Common-Http,Web-WebServer,Web-Common-Http,Web-Default-Doc,Web-Dir-Browsing,Web-Http-Errors,Web-Static-Content,Web-Health,Web-Http-Logging,Web-Log-Libraries,Web-Request-Monitor,Web-Performance,Web-Stat-Compression,Web-Security,Web-Filtering,Web-App-Dev,Web-CGI,Web-Ftp-Server,Web-Mgmt-Tools,Web-Mgmt-Console,Web-Mgmt-Compat,NET-Framework-45-Features,NET-Framework-45-Core,NET-Framework-45-ASPNET,NET-WCF-Services45,NET-WCF-TCP-PortSharing45,FS-SMB1,User-Interfaces-Infra,Server-Gui-Mgmt-Infra,Server-Gui-Shell,PowerShellRoot,PowerShell,PowerShell-ISE,WAS,WAS-Process-Model,WAS-Config-APIs,WoW64-Support"
+
+- name: webserver
+  when: win_feature_result.changed == true
+  win_restart:
+      force=true

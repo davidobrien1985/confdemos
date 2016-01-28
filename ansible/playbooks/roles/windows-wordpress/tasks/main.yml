@@ -1,0 +1,17 @@
+---
+  - name: Check wordpress zip
+    action: win_stat path="C:\wordpress.zip"
+    register: wpzipfile
+
+  - name: Download Wordpress zip
+    action: win_get_url dest="C:\wordpress.zip" url="http://WordPress.org/latest.zip"
+    when: wpzipfile.stat.exists == false
+
+  - name: Check wordpress virtual folder
+    action: win_stat path="C:\inetpub\wordpress"
+    register: wpiisdir
+
+  - name: Unzip wordpress folder
+    action: script extractwp.ps1
+    when: wpiisdir.stat.exists == false
+

@@ -1,0 +1,8 @@
+---
+  - name: install git
+    win_chocolatey: 
+      name: "git"
+
+  - name: install notepadplusplus
+    win_chocolatey: 
+      name: "notepadplusplus.install"

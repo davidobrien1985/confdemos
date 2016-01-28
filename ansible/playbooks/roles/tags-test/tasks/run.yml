@@ -1,0 +1,4 @@
+---
+- name: Should run
+  debug:
+    msg: 'This should run'

@@ -1,0 +1,3 @@
+---
+  - name: Windows Ping
+    action: win_ping

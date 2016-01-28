@@ -1,0 +1,53 @@
+---
+  - name: test hostvars
+    debug:
+      msg: "{{ ansible_hostname }} has nic {{ ansible_interfaces[0].interface_name }}"
+
+  - name: test hostvars
+    debug:
+      msg: "10.10.50.4,8.8.8.8"
+
+  - name: DNS Client server address
+    win_dns_client:
+      dns_server_Address: "10.10.50.4,8.8.8.8"
+      interface_index: "{{ ansible_interfaces[0].interface_index }}"
+
+  - name: IIS Site
+    win_iis_website:
+      name: "Default Web site"
+      path: 'C:\inetpub\wwwroot'
+      state: Stopped
+
+  - name: New IIS Site
+    win_iis_website:
+      name: "New Web site"
+      path: 'C:\inetpub\wwwroot'
+      state: Started
+      application_pool: "DefaultAppPool"
+
+
+
+  - name: test the things
+    win_testmod: path=somethingelse
+
+  - name: Install the vc thingy
+    win_package:
+      name="Microsoft Visual C thingy"
+      path={{ vc_installpath }}
+      ProductId="{CF2BEA3C-26EA-32F8-AA9B-331F7E34BA97}"
+      Arguments="/install /passive /norestart"
+
+  - name: Check for reboot
+    register: pending_reboot
+    win_test_reboot:
+
+  - name: execute reboot
+    when: pending_reboot.pending_reboot == true
+    debug:
+      msg: "we need to reboot!"
+
+  - name: Set the hosts file thingy
+    win_hosts_file:
+      host_name: "www.crayon.com"
+      ip_address: "217.114.91.109"
+      ensure: present

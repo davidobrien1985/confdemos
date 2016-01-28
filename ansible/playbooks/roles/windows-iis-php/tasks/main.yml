@@ -1,0 +1,60 @@
+---
+# Enable the required win features
+  - name: webserver
+    win_feature:
+      name='Web-Server,Web-Mgmt-Tools,web-Default-Doc,Web-Dir-Browsing,Web-Http-Errors,Web-Static-Content,Web-Http-Logging,web-Stat-Compression,web-Filtering,web-CGI,web-ISAPI-Ext,web-ISAPI-Filter'
+      state=present
+      restart=False
+
+# Download and extract PHP thingy if it's not already on disk
+  - name: Verify PHP thingy
+    win_stat:
+      path="C:\php.zip"
+    register: phpfile
+
+  - name: Download PHP
+    win_get_url:
+      dest="C:\php.zip"
+      url={{ php_installpath }}
+    when: phpfile.stat.exists == false
+
+  - name: Verify PHP folder
+    action: win_stat path="C:\php"
+    register: phpfolder
+
+  - name: Unzip PHP folder
+    action: script extractfile.ps1
+    when: phpfolder.stat.exists == false
+
+# Download and install Visual C Redist2012
+  - name: Install the vc thingy
+    win_package:
+      name="Microsoft Visual C thingy"
+      path={{ vc_installpath }}
+      ProductId="{CF2BEA3C-26EA-32F8-AA9B-331F7E34BA97}"
+      Arguments="/install /passive /norestart"
+
+# Make sure the MySql extention for PHP is in the main PHP path (ext\php_mysql.dll --> php_mysql.dll)
+  - name: Ensure the mysql extension is in its correct folder
+    action: win_stat path="C:\php\php_mysql.dll"
+    register: phpmysqlfile
+
+  - name: Ensure the mysql extension is in its correct folder
+    script: copymysqldll.ps1
+    when: phpmysqlfile.stat.exists == false
+
+# Make sure the php binary folder is in the path
+  - name: env path
+    win_environment2:
+      env_path="something"
+
+# Make sure the php.ini is in the Php folder
+#  - name: php.ini
+#    template:
+#      src=php.ini.j2
+#      dest='C:\php\php.ini'
+
+# Make sure the php cgi module is registered with IIS
+  - name: Ensure the php scriptmap exists
+    script: configurephp.ps1
+

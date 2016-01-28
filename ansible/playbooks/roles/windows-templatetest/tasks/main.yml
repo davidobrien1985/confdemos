@@ -1,0 +1,4 @@
+---
+
+- name: Windows Template test
+  action: template src=windowstesttempl.j2 dest="C:\test.txt"

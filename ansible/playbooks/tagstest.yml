@@ -1,0 +1,7 @@
+---
+- name: tags test demo
+  hosts: windows
+  gather_facts: false
+  serial: 1
+  roles:
+    - tags-test

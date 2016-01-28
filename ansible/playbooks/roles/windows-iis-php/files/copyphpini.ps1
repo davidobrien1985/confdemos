@@ -1,0 +1,1 @@
+﻿Copy-Item -Path "C:\php\php.ini-production" -Destination "C:\php\php.ini"

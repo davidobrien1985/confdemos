@@ -1,0 +1,7 @@
+---
+- name: Test Windows
+  hosts: windows-web
+  roles:
+  - windows-iis-php
+  - windows-wordpress
+
