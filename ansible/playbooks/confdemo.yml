@@ -1,0 +1,7 @@
+---
+- name: Conference demo
+  hosts: windows
+  gather_facts: false
+  serial: 1
+  roles:
+    - confdemo

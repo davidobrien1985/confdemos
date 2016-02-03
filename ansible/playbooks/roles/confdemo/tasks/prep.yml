@@ -1,0 +1,5 @@
+---
+
+- name: Get Facts
+  setup:
+    facts_path: 'C:\\temp'
